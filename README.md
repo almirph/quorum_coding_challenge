@@ -39,7 +39,7 @@ npm test
 ## Challenge Questions
 
 ### 1. Discuss your solution’s time complexity. What tradeoffs did you make?
-I chosed a simple architectural approach that stores the dataset in-memory for ease of manipulation. To improve scalability for larger datasets, the system should be refactored to use file streams and chunk-based processing to reduce the memory footprint.
+I chosed a simple architectural approach that stores the dataset in-memory for ease of manipulation. To improve scalability for big datasets, the model and resource should be extended to use file streams and chunk-based processing to reduce the memory footprint.
 
 **Overall Complexity: O(L + B + V + R + B×V + L)**
 
