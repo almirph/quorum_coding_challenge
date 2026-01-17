@@ -1,13 +1,15 @@
 import { Legislator, Bill, Vote, VoteResult } from './models/index.js';
-import { CSVResource } from './resource/index.js';
+import { CSVResource, IResource } from './resource/index.js';
 import { ANSWER_COLUMNS } from './config/answer-columns.js';
 
 function main(): void {
+  
+  const resource: IResource = new CSVResource();
 
-  const legislatorsData = CSVResource.legislators();
-  const billsData = CSVResource.bills();
-  const votesData = CSVResource.votes();
-  const voteResultsData = CSVResource.voteResults();
+  const legislatorsData = resource.legislators();
+  const billsData = resource.bills();
+  const votesData = resource.votes();
+  const voteResultsData = resource.voteResults();
 
   const legislators = legislatorsData.map(
     leg => new Legislator(leg.id, leg.name)
@@ -25,14 +27,14 @@ function main(): void {
     vr => new VoteResult(vr.id, vr.legislator_id, vr.vote_id, vr.vote_type)
   );
 
-  const legislatorsFile = CSVResource.saveCsv(
+  const legislatorsFile = resource.saveCsv(
     'legislators-support-oppose-count.csv',
     ANSWER_COLUMNS.legislator,
     legislators
   );
   console.log(`  - ${legislatorsFile}`);
 
-  const billsFile = CSVResource.saveCsv(
+  const billsFile = resource.saveCsv(
     'bills.csv',
     ANSWER_COLUMNS.bill,
     bills
